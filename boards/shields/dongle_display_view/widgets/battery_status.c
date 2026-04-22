@@ -52,30 +52,35 @@ static void draw_battery(lv_obj_t *canvas, uint8_t level, bool usb_present) {
     lv_canvas_set_px(canvas, 4, 0, lv_color_white(), LV_OPA_COVER);
 
     if (level <= 10 || usb_present) {
-        lv_layer_t * layer = lv_canvas_get_layer(canvas);
+        lv_layer_t layer;
+        lv_canvas_init_layer(canvas, &layer);
         lv_area_t coords = {1, 2, 3, 6}; /* {x1, y1, x2, y2} */
-        lv_draw_rect(layer, &rect_fill_dsc, &coords);
-        lv_canvas_finish_layer(canvas, layer);
+        lv_draw_rect(&layer, &rect_fill_dsc, &coords);
+        lv_canvas_finish_layer(canvas, &layer);
     } else if (level <= 30) {
-        lv_layer_t * layer = lv_canvas_get_layer(canvas);
+        lv_layer_t layer;
+        lv_canvas_init_layer(canvas, &layer);
         lv_area_t coords = {1, 2, 3, 5}; /* {x1, y1, x2, y2} */
-        lv_draw_rect(layer, &rect_fill_dsc, &coords);
-        lv_canvas_finish_layer(canvas, layer);
+        lv_draw_rect(&layer, &rect_fill_dsc, &coords);
+        lv_canvas_finish_layer(canvas, &layer);
     } else if (level <= 50) {
-        lv_layer_t * layer = lv_canvas_get_layer(canvas);
+        lv_layer_t layer;
+        lv_canvas_init_layer(canvas, &layer);
         lv_area_t coords = {1, 2, 3, 4}; /* {x1, y1, x2, y2} */
-        lv_draw_rect(layer, &rect_fill_dsc, &coords);
-        lv_canvas_finish_layer(canvas, layer);
+        lv_draw_rect(&layer, &rect_fill_dsc, &coords);
+        lv_canvas_finish_layer(canvas, &layer);
     } else if (level <= 70) {
-        lv_layer_t * layer = lv_canvas_get_layer(canvas);
+        lv_layer_t layer;
+        lv_canvas_init_layer(canvas, &layer);
         lv_area_t coords = {1, 2, 3, 3}; /* {x1, y1, x2, y2} */
-        lv_draw_rect(layer, &rect_fill_dsc, &coords);
-        lv_canvas_finish_layer(canvas, layer);
+        lv_draw_rect(&layer, &rect_fill_dsc, &coords);
+        lv_canvas_finish_layer(canvas, &layer);
     } else if (level <= 90) {
-        lv_layer_t * layer = lv_canvas_get_layer(canvas);
+        lv_layer_t layer;
+        lv_canvas_init_layer(canvas, &layer);
         lv_area_t coords = {1, 2, 3, 2}; /* {x1, y1, x2, y2} */
-        lv_draw_rect(layer, &rect_fill_dsc, &coords);
-        lv_canvas_finish_layer(canvas, layer);
+        lv_draw_rect(&layer, &rect_fill_dsc, &coords);
+        lv_canvas_finish_layer(canvas, &layer);
     }
 }
 
