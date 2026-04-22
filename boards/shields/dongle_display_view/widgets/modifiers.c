@@ -89,7 +89,14 @@ struct modifier_symbol *modifier_symbols[] = {
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
 static void move_object_y(void *obj, int32_t from, int32_t to) {
-    lv_anim_start(obj, lv_obj_set_y, from, to, 200, lv_anim_path_overshoot);
+    lv_anim_t a;
+    lv_anim_init(&a);
+    lv_anim_set_var(&a, obj);
+    lv_anim_set_values(&a, from, to);
+    lv_anim_set_time(&a, 200);
+    lv_anim_set_exec_cb(&a, lv_obj_set_y);
+    lv_anim_set_path_cb(&a, lv_anim_path_overshoot);
+    lv_anim_start(&a);
 }
 
 static void set_modifiers(lv_obj_t *widget, struct modifiers_state state) {
