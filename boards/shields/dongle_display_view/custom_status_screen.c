@@ -30,9 +30,9 @@ lv_obj_t *zmk_display_status_screen() {
 
     screen = lv_obj_create(NULL);
 
-    lv_obj_set_style_font(screen, &lv_font_unscii_8, 0);
-    lv_obj_set_style_letter_space(screen, 1, 0);
-    lv_obj_set_style_line_space(screen, 1, 0);
+    lv_obj_set_style_text_font(screen, &lv_font_unscii_8, 0);
+    lv_obj_set_style_text_letter_space(screen, 1, 0);
+    lv_obj_set_style_text_line_space(screen, 1, 0);
     
     zmk_widget_output_status_init(&output_status_widget, screen);
     lv_obj_align(zmk_widget_output_status_obj(&output_status_widget), LV_ALIGN_TOP_LEFT, 0, 0);

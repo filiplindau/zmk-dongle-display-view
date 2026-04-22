@@ -52,15 +52,30 @@ static void draw_battery(lv_obj_t *canvas, uint8_t level, bool usb_present) {
     lv_canvas_set_px(canvas, 4, 0, lv_color_white(), LV_OPA_COVER);
 
     if (level <= 10 || usb_present) {
-        lv_canvas_draw_rect(canvas, 1, 2, 3, 5, &rect_fill_dsc);
+        lv_layer_t * layer = lv_canvas_get_layer(canvas);
+        lv_area_t coords = {1, 2, 3, 6}; /* {x1, y1, x2, y2} */
+        lv_draw_rect(layer, &rect_fill_dsc, &coords);
+        lv_canvas_finish_layer(canvas, layer);
     } else if (level <= 30) {
-        lv_canvas_draw_rect(canvas, 1, 2, 3, 4, &rect_fill_dsc);
+        lv_layer_t * layer = lv_canvas_get_layer(canvas);
+        lv_area_t coords = {1, 2, 3, 5}; /* {x1, y1, x2, y2} */
+        lv_draw_rect(layer, &rect_fill_dsc, &coords);
+        lv_canvas_finish_layer(canvas, layer);
     } else if (level <= 50) {
-        lv_canvas_draw_rect(canvas, 1, 2, 3, 3, &rect_fill_dsc);
+        lv_layer_t * layer = lv_canvas_get_layer(canvas);
+        lv_area_t coords = {1, 2, 3, 4}; /* {x1, y1, x2, y2} */
+        lv_draw_rect(layer, &rect_fill_dsc, &coords);
+        lv_canvas_finish_layer(canvas, layer);
     } else if (level <= 70) {
-        lv_canvas_draw_rect(canvas, 1, 2, 3, 2, &rect_fill_dsc);
+        lv_layer_t * layer = lv_canvas_get_layer(canvas);
+        lv_area_t coords = {1, 2, 3, 3}; /* {x1, y1, x2, y2} */
+        lv_draw_rect(layer, &rect_fill_dsc, &coords);
+        lv_canvas_finish_layer(canvas, layer);
     } else if (level <= 90) {
-        lv_canvas_draw_rect(canvas, 1, 2, 3, 1, &rect_fill_dsc);
+        lv_layer_t * layer = lv_canvas_get_layer(canvas);
+        lv_area_t coords = {1, 2, 3, 2}; /* {x1, y1, x2, y2} */
+        lv_draw_rect(layer, &rect_fill_dsc, &coords);
+        lv_canvas_finish_layer(canvas, layer);
     }
 }
 
@@ -137,7 +152,7 @@ int zmk_widget_dongle_battery_status_init(struct zmk_widget_dongle_battery_statu
         lv_obj_t *image_canvas = lv_canvas_create(widget->obj);
         lv_obj_t *battery_label = lv_label_create(widget->obj);
 
-        lv_canvas_set_buffer(image_canvas, battery_image_buffer[i], 5, 8, LV_IMG_CF_TRUE_COLOR);
+        lv_canvas_set_buffer(image_canvas, battery_image_buffer[i], 5, 8, LV_COLOR_FORMAT_NATIVE);
 
         lv_obj_align(image_canvas, LV_ALIGN_TOP_RIGHT, 0, i * 10);
         lv_obj_align(battery_label, LV_ALIGN_TOP_RIGHT, -7, i * 10);
