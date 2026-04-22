@@ -25,18 +25,14 @@ static struct zmk_widget_bongo_cat bongo_cat_widget;
 static struct zmk_widget_hid_indicators hid_indicators_widget;
 #endif
 
-lv_style_t global_style;
-
 lv_obj_t *zmk_display_status_screen() {
     lv_obj_t *screen;
 
     screen = lv_obj_create(NULL);
 
-    lv_style_init(&global_style);
-    lv_style_set_text_font(&global_style, &lv_font_unscii_8);
-    lv_style_set_text_letter_space(&global_style, 1);
-    lv_style_set_text_line_space(&global_style, 1);
-    lv_obj_add_style(screen, &global_style, LV_PART_MAIN);
+    lv_obj_set_style_font(screen, &lv_font_unscii_8, 0);
+    lv_obj_set_style_letter_space(screen, 1, 0);
+    lv_obj_set_style_line_space(screen, 1, 0);
     
     zmk_widget_output_status_init(&output_status_widget, screen);
     lv_obj_align(zmk_widget_output_status_obj(&output_status_widget), LV_ALIGN_TOP_LEFT, 0, 0);

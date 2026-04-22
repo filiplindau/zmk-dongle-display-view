@@ -84,25 +84,11 @@ static void anim_size_cb(void * var, int32_t v) {
 }
 
 static void move_object_x(void *obj, int32_t from, int32_t to) {
-    lv_anim_t a;
-    lv_anim_init(&a);
-    lv_anim_set_var(&a, obj);
-    lv_anim_set_time(&a, 200); // will be replaced with lv_anim_set_duration
-    lv_anim_set_exec_cb(&a, anim_x_cb);
-    lv_anim_set_path_cb(&a, lv_anim_path_overshoot);
-    lv_anim_set_values(&a, from, to);
-    lv_anim_start(&a);
+    lv_anim_start(obj, lv_anim_exec_x_cb, from, to, 200, lv_anim_path_overshoot);
 }
 
 static void change_size_object(void *obj, int32_t from, int32_t to) {
-    lv_anim_t a;
-    lv_anim_init(&a);
-    lv_anim_set_var(&a, obj);
-    lv_anim_set_time(&a, 200); // will be replaced with lv_anim_set_duration
-    lv_anim_set_exec_cb(&a, anim_size_cb);
-    lv_anim_set_path_cb(&a, lv_anim_path_ease_in_out);
-    lv_anim_set_values(&a, from, to);
-    lv_anim_start(&a);
+    lv_anim_start(obj, anim_size_cb, from, to, 200, lv_anim_path_ease_in_out);
 }
 
 static void set_status_symbol(lv_obj_t *widget, struct output_status_state state) {
@@ -186,14 +172,10 @@ int zmk_widget_output_status_init(struct zmk_widget_output_status *widget, lv_ob
     lv_obj_t *bt_status = lv_img_create(widget->obj);
     lv_obj_align_to(bt_status, bt, LV_ALIGN_OUT_RIGHT_TOP, 2, 1);
     
-    static lv_style_t style_line;
-    lv_style_init(&style_line);
-    lv_style_set_line_width(&style_line, 2);
-
     lv_obj_t *selection_line;
     selection_line = lv_line_create(widget->obj);
     lv_line_set_points(selection_line, selection_line_points, 2);
-    lv_obj_add_style(selection_line, &style_line, 0);
+    lv_obj_set_style_width(selection_line, 2, 0);
     lv_obj_align_to(selection_line, usb, LV_ALIGN_OUT_TOP_LEFT, 3, -1);
  
     sys_slist_append(&widgets, &widget->node);
