@@ -94,7 +94,7 @@ static void move_object_y(void *obj, int32_t from, int32_t to) {
     lv_anim_set_var(&a, obj);
     lv_anim_set_values(&a, from, to);
     lv_anim_set_time(&a, 200);
-    lv_anim_set_exec_cb(&a, lv_obj_set_y);
+    lv_anim_set_exec_cb(&a, (lv_anim_exec_xcb_t)lv_obj_set_y);
     lv_anim_set_path_cb(&a, lv_anim_path_overshoot);
     lv_anim_start(&a);
 }
