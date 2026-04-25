@@ -37,8 +37,8 @@ lv_obj_t *zmk_display_status_screen() {
     lv_obj_set_style_text_letter_space(screen, 1, 0);
     lv_obj_set_style_text_line_space(screen, 1, 0);
     
-    // zmk_dongle_output_status_init(&output_status_widget, screen);
-    // lv_obj_align(zmk_dongle_output_status_obj(&output_status_widget), LV_ALIGN_TOP_LEFT, 0, 0);
+     zmk_dongle_output_status_init(&output_status_widget, screen);
+     lv_obj_align(zmk_dongle_output_status_obj(&output_status_widget), LV_ALIGN_TOP_LEFT, 0, 0);
     
     // zmk_widget_bongo_cat_init(&bongo_cat_widget, screen);
     // lv_obj_align(zmk_widget_bongo_cat_obj(&bongo_cat_widget), LV_ALIGN_BOTTOM_RIGHT, 0, -7);
