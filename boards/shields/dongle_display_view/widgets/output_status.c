@@ -33,7 +33,7 @@ LV_IMG_DECLARE(sym_3);
 LV_IMG_DECLARE(sym_4);
 LV_IMG_DECLARE(sym_5);
 
-const lv_img_dsc_t *sym_num[] = {
+const lv_image_dsc_t *sym_num[] = {
     &sym_1,
     &sym_2,
     &sym_3,
@@ -55,7 +55,7 @@ enum selection_line_state {
     selection_line_state_bt
 } current_selection_line_state;
 
-lv_point_t selection_line_points[] = { {0, 0}, {13, 0} }; // will be replaced with lv_point_precise_t 
+lv_point_precise_t selection_line_points[] = { {0, 0}, {13, 0} }; // will be replaced with lv_point_precise_t 
 
 struct output_status_state {
     struct zmk_endpoint_instance selected_endpoint;
@@ -73,10 +73,6 @@ static struct output_status_state get_state(const zmk_event_t *_eh) {
         .active_profile_bonded = !zmk_ble_active_profile_is_open(),
         .usb_is_hid_ready = zmk_usb_is_hid_ready()
     };
-}
-
-static void anim_x_cb(void * var, int32_t v) {
-    lv_obj_set_x(var, v);
 }
 
 static void anim_size_cb(void * var, int32_t v) {
@@ -114,6 +110,9 @@ static void set_status_symbol(lv_obj_t *widget, struct output_status_state state
     lv_obj_t *selection_line = lv_obj_get_child(widget, output_symbol_selection_line);
 
     switch (state.selected_endpoint.transport) {
+    case ZMK_TRANSPORT_NONE:
+        /* Do nothing or assign a blank icon */
+        break;
     case ZMK_TRANSPORT_USB:
         if (current_selection_line_state != selection_line_state_usb) {
             move_object_x(selection_line, lv_obj_get_x(bt) - 1, lv_obj_get_x(usb) - 1);
@@ -154,17 +153,17 @@ static void set_status_symbol(lv_obj_t *widget, struct output_status_state state
 }
 
 static void output_status_update_cb(struct output_status_state state) {
-    struct zmk_widget_output_status *widget;
+    struct zmk_dongle_output_status *widget;
     SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) { set_status_symbol(widget->obj, state); }
 }
 
-ZMK_DISPLAY_WIDGET_LISTENER(widget_output_status, struct output_status_state,
+ZMK_DISPLAY_WIDGET_LISTENER(dongle_output_status, struct output_status_state,
                             output_status_update_cb, get_state)
-ZMK_SUBSCRIPTION(widget_output_status, zmk_endpoint_changed);
-ZMK_SUBSCRIPTION(widget_output_status, zmk_ble_active_profile_changed);
-ZMK_SUBSCRIPTION(widget_output_status, zmk_usb_conn_state_changed);
+ZMK_SUBSCRIPTION(dongle_output_status, zmk_endpoint_changed);
+ZMK_SUBSCRIPTION(dongle_output_status, zmk_ble_active_profile_changed);
+ZMK_SUBSCRIPTION(dongle_output_status, zmk_usb_conn_state_changed);
 
-int zmk_widget_output_status_init(struct zmk_widget_output_status *widget, lv_obj_t *parent) {
+int zmk_dongle_output_status_init(struct zmk_dongle_output_status *widget, lv_obj_t *parent) {
     widget->obj = lv_obj_create(parent);
 
     lv_obj_set_size(widget->obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
@@ -194,10 +193,10 @@ int zmk_widget_output_status_init(struct zmk_widget_output_status *widget, lv_ob
  
     sys_slist_append(&widgets, &widget->node);
 
-    widget_output_status_init();
+    dongle_output_status_init();
     return 0;
 }
 
-lv_obj_t *zmk_widget_output_status_obj(struct zmk_widget_output_status *widget) {
+lv_obj_t *zmk_dongle_output_status_obj(struct zmk_dongle_output_status *widget) {
     return widget->obj;
 }
