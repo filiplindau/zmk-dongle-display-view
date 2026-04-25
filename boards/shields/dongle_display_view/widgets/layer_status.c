@@ -39,7 +39,7 @@ static void set_layer_symbol(lv_obj_t *label, struct layer_status_state state) {
     }
 }
 
-static void layer_status_update_cb(struct layer_status_state state) {
+static void dongle_layer_status_update_cb(struct layer_status_state state) {
     struct zmk_dongle_layer_status *widget;
     SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) { set_layer_symbol(widget->obj, state); }
 }
@@ -52,7 +52,7 @@ static struct layer_status_state layer_status_get_state(const zmk_event_t *eh) {
     };
 }
 
-ZMK_DISPLAY_WIDGET_LISTENER(dongle_layer_status, struct layer_status_state, layer_status_update_cb,
+ZMK_DISPLAY_WIDGET_LISTENER(dongle_layer_status, struct layer_status_state, dongle_layer_status_update_cb,
                             layer_status_get_state)
 
 ZMK_SUBSCRIPTION(dongle_layer_status, zmk_layer_state_changed);

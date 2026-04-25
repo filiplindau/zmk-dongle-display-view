@@ -152,13 +152,13 @@ static void set_status_symbol(lv_obj_t *widget, struct output_status_state state
     }
 }
 
-static void output_status_update_cb(struct output_status_state state) {
+static void dongle_output_status_update_cb(struct output_status_state state) {
     struct zmk_dongle_output_status *widget;
     SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) { set_status_symbol(widget->obj, state); }
 }
 
 ZMK_DISPLAY_WIDGET_LISTENER(dongle_output_status, struct output_status_state,
-                            output_status_update_cb, get_state)
+                            dongle_output_status_update_cb, get_state)
 ZMK_SUBSCRIPTION(dongle_output_status, zmk_endpoint_changed);
 ZMK_SUBSCRIPTION(dongle_output_status, zmk_ble_active_profile_changed);
 ZMK_SUBSCRIPTION(dongle_output_status, zmk_usb_conn_state_changed);
