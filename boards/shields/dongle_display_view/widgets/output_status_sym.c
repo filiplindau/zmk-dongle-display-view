@@ -28,6 +28,7 @@ const lv_image_dsc_t sym_1 = {
   .header.flags = 0,
   .header.w = 5,
   .header.h = 6,
+  .header.stride = 1,
   .data_size = 14,
   .data = sym_1_map,
 };
@@ -49,6 +50,7 @@ const lv_image_dsc_t sym_2 = {
   .header.flags = 0,
   .header.w = 5,
   .header.h = 6,
+  .header.stride = 1,
   .data_size = 14,
   .data = sym_2_map,
 };
@@ -70,6 +72,7 @@ const lv_image_dsc_t sym_3 = {
   .header.flags = 0,
   .header.w = 5,
   .header.h = 6,
+  .header.stride = 1,
   .data_size = 14,
   .data = sym_3_map,
 };
@@ -91,6 +94,7 @@ const lv_image_dsc_t sym_4 = {
   .header.flags = 0,
   .header.w = 5,
   .header.h = 6,
+  .header.stride = 1,
   .data_size = 14,
   .data = sym_4_map,
 };
@@ -112,6 +116,7 @@ const lv_image_dsc_t sym_5 = {
   .header.flags = 0,
   .header.w = 5,
   .header.h = 6,
+  .header.stride = 1,
   .data_size = 14,
   .data = sym_5_map,
 };
@@ -133,6 +138,7 @@ const lv_image_dsc_t sym_ok = {
   .header.flags = 0,
   .header.w = 5,
   .header.h = 5,
+  .header.stride = 1,
   .data_size = 13,
   .data = sym_ok_map,
 };
@@ -154,6 +160,7 @@ const lv_image_dsc_t sym_nok = {
   .header.flags = 0,
   .header.w = 5,
   .header.h = 5,
+  .header.stride = 1,
   .data_size = 13,
   .data = sym_nok_map,
 };
@@ -175,6 +182,7 @@ const lv_image_dsc_t sym_open = {
   .header.flags = 0,
   .header.w = 5,
   .header.h = 5,
+  .header.stride = 1,
   .data_size = 13,
   .data = sym_open_map,
 };
@@ -199,6 +207,7 @@ const lv_image_dsc_t sym_bt = {
   .header.flags = 0,
   .header.w = 9,
   .header.h = 14,
+  .header.stride = 2,
   .data_size = 36,
   .data = sym_bt_map,
 };
@@ -223,6 +232,7 @@ const lv_image_dsc_t sym_usb = {
   .header.flags = 0,
   .header.w = 9,
   .header.h = 14,
+  .header.stride = 2,
   .data_size = 36,
   .data = sym_usb_map,
 };

@@ -77,6 +77,7 @@ static struct output_status_state get_state(const zmk_event_t *_eh) {
 
 static void anim_size_cb(void * var, int32_t v) {
     selection_line_points[1].x = v;
+    lv_obj_invalidate((lv_obj_t *)var);
 }
 
 static void move_object_x(void *obj, int32_t from, int32_t to) {
@@ -109,6 +110,7 @@ static void set_status_symbol(lv_obj_t *widget, struct output_status_state state
     lv_obj_t *bt_status = lv_obj_get_child(widget, output_symbol_bt_status);
     lv_obj_t *selection_line = lv_obj_get_child(widget, output_symbol_selection_line);
 
+    lv_obj_update_layout(widget);
     switch (state.selected_endpoint.transport) {
     case ZMK_TRANSPORT_NONE:
         /* Do nothing or assign a blank icon */
@@ -188,7 +190,7 @@ int zmk_dongle_output_status_init(struct zmk_dongle_output_status *widget, lv_ob
     lv_obj_t *selection_line;
     selection_line = lv_line_create(widget->obj);
     lv_line_set_points(selection_line, selection_line_points, 2);
-    lv_obj_set_style_width(selection_line, 2, 0);
+    lv_obj_set_style_line_width(selection_line, 2, 0);
     lv_obj_align_to(selection_line, usb, LV_ALIGN_OUT_TOP_LEFT, 3, -1);
  
     sys_slist_append(&widgets, &widget->node);
