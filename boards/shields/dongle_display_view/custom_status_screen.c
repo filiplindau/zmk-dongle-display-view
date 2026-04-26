@@ -30,7 +30,8 @@ lv_obj_t *zmk_display_status_screen() {
 
     screen = lv_obj_create(NULL);
 
-    lv_obj_set_style_bg_color(screen, lv_color_black(), 0);
+    //lv_obj_set_style_bg_color(screen, lv_color_black(), 0);
+    lv_obj_set_style_bg_color(screen, lv_color_hex(0x333333), 0);
     lv_obj_set_style_bg_opa(screen, LV_OPA_COVER, 0);
 
     lv_obj_set_style_text_font(screen, &lv_font_unscii_8, 0);
